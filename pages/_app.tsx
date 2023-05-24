@@ -1,10 +1,13 @@
+import { type AppType } from "next/app";
 import Layout from "./layout";
 import "@/styles/globals.css";
 
-export default function App({ Component, pageProps }: any) {
+const App: AppType = ({ Component, pageProps }) => {
     return (
         <Layout>
             <Component {...pageProps} />
         </Layout>
     );
 }
+
+export default App;
