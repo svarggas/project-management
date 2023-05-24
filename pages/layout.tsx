@@ -1,11 +1,21 @@
-import '@/styles/globals.css';
+import type { ReactNode } from "react";
+import { Container, Row, Col } from "react-bootstrap";
+
+import Header from "@/components/shared/Header";
 
 const Layout = (
-  { children }: { children: React.ReactNode }
+  { children }: { children: ReactNode }
 ) => {
   return (
-    <main style={{ background: 'red' }}>
-      {children}
+    <main>
+      <Header />
+      <Container>
+        <Row>
+          <Col>
+            {children}
+          </Col>
+        </Row>
+      </Container>
     </main>
   )
 }
