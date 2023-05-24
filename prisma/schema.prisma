@@ -6,6 +6,81 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider          = "postgresql"
+  url               = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  directUrl         = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+  shadowDatabaseUrl = env("POSTGRES_URL_NON_POOLING") // used for migrations
+}
+
+model Organization {
+  id          String  @id @default(uuid())
+  name        String
+  description String?
+
+  members  User[]
+  projects Project[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model User {
+  id       String @id @default(uuid())
+  email    String @unique
+  password String
+  name     String
+
+  organization   Organization @relation(fields: [organizationId], references: [id])
+  organizationId String
+  projects       Project[]
+  tasksAssigned  Task[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Project {
+  id          String  @id @default(uuid())
+  name        String
+  description String?
+
+  organization   Organization @relation(fields: [organizationId], references: [id])
+  organizationId String
+  members        User[]
+  tasks          Task[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum TaskStatus {
+  BACKLOG
+  INPROGRESS
+  QA
+  REVIEW
+  UAT
+  DONE
+}
+
+enum TaskType {
+  BUG
+  FEATURE
+  REQUEST
+  OTHER
+}
+
+model Task {
+  id          String     @id @default(uuid())
+  name        String
+  description String?
+  type        TaskType
+  status      TaskStatus
+
+  project         Project @relation(fields: [projectAssigned], references: [id])
+  projectAssigned String
+  User            User?   @relation(fields: [userAssigned], references: [id])
+  userAssigned    String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
