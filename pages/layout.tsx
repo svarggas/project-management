@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 
-import Header from "@/components/shared/Header";
+import Header from "~/components/shared/Header";
 
 const Layout = (
   { children }: { children: ReactNode }

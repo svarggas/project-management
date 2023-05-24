@@ -1,13 +1,15 @@
-import "@/styles/globals.css";
+import { type AppType } from "next/app";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 
 import Layout from "./layout";
 
-export default function App({ Component, pageProps }: any) {
+const App: AppType = ({ Component, pageProps }) => {
     return (
         <Layout>
             <Component {...pageProps} />
         </Layout>
     );
 }
+
+export default App;
