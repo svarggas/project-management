@@ -8,8 +8,13 @@ import user from "./user";
 
 const graph = gql`
     type Query {
-        hello: String!
         getOrganization(id: String!): Organization
+    }
+    
+    type Mutation {
+        createOrganization(name: String!, description: String): Boolean
+        deleteOrganization(id: String!): Boolean
+        updateOrganization(id: String!, name: String, description: String, members: [String], projects: [String]): Organization
     }
 `;
 

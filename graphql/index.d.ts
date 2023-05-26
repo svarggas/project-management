@@ -1,8 +1,9 @@
 import { GraphQLResolveInfo } from "graphql";
+import PrismaClient from "~/prisma/client";
 
 export interface CustomContext {
     req: NextRequest;
-    prisma: any;
+    prisma: typeof PrismaClient;
 }
 
 export type ResolverFunc<Args = unknown, Parent = unknown, Return = unknown> = (
