@@ -15,7 +15,7 @@ const updateOrganization: ResolverFunc<updateArgs> = async (
     const { id, name, description, members, projects } = args;
 
     if (!id) {
-        throw new Error("Name is required");
+        throw new Error("Identifier is required");
     }
 
     const org = await prisma.organization.findUnique({
