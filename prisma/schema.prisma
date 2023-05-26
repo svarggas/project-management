@@ -44,8 +44,8 @@ model Project {
   name        String
   description String?
 
-  organization   Organization @relation(fields: [organizationId], references: [id])
-  organizationId String
+  organization   Organization? @relation(fields: [organizationId], references: [id])
+  organizationId String?
   members        User[]
   tasks          Task[]
 
@@ -76,9 +76,9 @@ model Task {
   type        TaskType
   status      TaskStatus
 
-  project         Project @relation(fields: [projectAssigned], references: [id])
-  projectAssigned String
-  User            User?   @relation(fields: [userAssigned], references: [id])
+  project         Project? @relation(fields: [projectAssigned], references: [id])
+  projectAssigned String?
+  User            User?    @relation(fields: [userAssigned], references: [id])
   userAssigned    String?
 
   createdAt DateTime @default(now())
