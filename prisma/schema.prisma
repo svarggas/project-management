@@ -30,8 +30,8 @@ model User {
   password String
   name     String
 
-  organization   Organization @relation(fields: [organizationId], references: [id])
-  organizationId String
+  organization   Organization? @relation(fields: [organizationId], references: [id])
+  organizationId String?
   projects       Project[]
   tasksAssigned  Task[]
 
@@ -55,9 +55,9 @@ model Project {
 
 enum TaskStatus {
   BACKLOG
-  INPROGRESS
+  IN_PROGRESS
   QA
-  REVIEW
+  ON_REVIEW
   UAT
   DONE
 }
