@@ -9,7 +9,11 @@ const getOrganization: ResolverFunc<Args> = async (_parent, args, ctx) => {
     const { prisma } = ctx;
 
     const data = await prisma.organization.findUnique({
-        where: { id }
+        where: { id },
+        include: {
+            members: true,
+            projects: true,
+        },
     });
 
     return data;
