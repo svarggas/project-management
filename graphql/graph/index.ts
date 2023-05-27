@@ -11,6 +11,7 @@ const graph = gql`
         getOrganization(id: String!): Organization
         getProject(id: String!): Project
         getTask(id: String!): Task
+        getUser(id: String!): User
     }
     
     type Mutation {
@@ -25,6 +26,10 @@ const graph = gql`
         createTask(name: String!, description: String, type: TaskType): Boolean
         deleteTask(id: String!): Boolean
         updateTask(id: String!, name: String, description: String, type: TaskType, status: TaskStatus, projectAssigned: String, userAssigned: String): Task
+
+        createUser(name: String!, email: String!): Boolean
+        deleteUser(id: String!): Boolean
+        updateUser(id: String!, name: String, email: String, organization: String, projects: [String], tasksAssigned: [String]): User
     }
 `;
 
