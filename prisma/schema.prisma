@@ -78,7 +78,7 @@ model Task {
 
   project         Project? @relation(fields: [projectAssigned], references: [id])
   projectAssigned String?
-  User            User?    @relation(fields: [userAssigned], references: [id])
+  user            User?    @relation(fields: [userAssigned], references: [id])
   userAssigned    String?
 
   createdAt DateTime @default(now())

@@ -5,7 +5,7 @@ const project = gql`
     id: String!
     name: String!
     description: String
-    organization: Organization!
+    organization: Organization
     members: [User]
     tasks: [Task]
     createdAt: String
