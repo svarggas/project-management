@@ -10,6 +10,10 @@ import createTask from "./task/createTask";
 import deleteTask from "./task/deleteTask";
 import updateTask from "./task/updateTask";
 
+import createUser from "./user/createUser";
+import updateUser from "./user/updateUser";
+import deleteUser from "./user/deleteUser";
+
 export default {
     createOrganization,
     updateOrganization,
@@ -20,4 +24,7 @@ export default {
     createTask,
     deleteTask,
     updateTask,
+    createUser,
+    deleteUser,
+    updateUser,
 };
