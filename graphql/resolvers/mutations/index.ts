@@ -6,6 +6,10 @@ import createProject from "./project/createProject";
 import deleteProject from "./project/deleteProject";
 import updateProject from "./project/updateProject";
 
+import createTask from "./task/createTask";
+import deleteTask from "./task/deleteTask";
+import updateTask from "./task/updateTask";
+
 export default {
     createOrganization,
     updateOrganization,
@@ -13,4 +17,7 @@ export default {
     createProject,
     deleteProject,
     updateProject,
+    createTask,
+    deleteTask,
+    updateTask,
 };
