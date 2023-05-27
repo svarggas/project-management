@@ -23,8 +23,8 @@ const task = gql`
     description: String
     type: TaskType
     status: TaskStatus
-    project: Project!
-    userAssigned: User
+    project: Project
+    user: User
     createdAt: String
     updatedAt: String
   }

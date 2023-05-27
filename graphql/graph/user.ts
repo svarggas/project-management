@@ -5,7 +5,7 @@ const user = gql`
     id: String!
     email: String!
     name: String!
-    organization: Organization!
+    organization: Organization
     projects: [Project]
     tasksAssigned: [Task]
     createdAt: String
