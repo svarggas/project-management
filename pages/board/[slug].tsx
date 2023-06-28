@@ -1,4 +1,4 @@
-import Column from "~/components/board/Column"
+import Column from "~/components/board"
 
 export default function Board() {
 
