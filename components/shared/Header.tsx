@@ -15,11 +15,13 @@ const AuthenticationBtns: FC<AuthenticationBtnsProps> = ({ user }) => {
 
   const signInHandler = () => {
     redirectToSignIn();
+    push('/');
     // @TODO: set user to redux store
   };
 
   const signOutHandler = () => {
     signOut();
+    // @TODO: Create page for unsgined 
     push('/');
     // @TODO: set user to redux store
   };
@@ -47,11 +49,16 @@ const AuthenticationBtns: FC<AuthenticationBtnsProps> = ({ user }) => {
 const Header: FC = () => {
 
   const { user } = useUser();
+  const { push } = useRouter();
+
+  const goHome = () => {
+    push('/');
+  };
 
   return (
     <Navbar collapseOnSelect expand="lg" bg='light' variant="light">
       <Container>
-        <Navbar.Brand href="#home">Project Management</Navbar.Brand>
+        <Navbar.Brand href="#home" onClick={() => goHome()}>Project Management</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto" />
