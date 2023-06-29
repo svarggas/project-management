@@ -4,6 +4,7 @@ import { prisma } from "~/prisma/client";
 export interface CustomContext {
     req: NextRequest;
     prisma: typeof prisma;
+    user: Record<string, any> | null | undefined;
 }
 
 export type ResolverFunc<Args = unknown, Parent = unknown, Return = unknown> = (
