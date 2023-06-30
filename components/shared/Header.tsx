@@ -2,7 +2,10 @@ import { FC } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
-import { useUser, useClerk } from "@clerk/nextjs";
+import { useSelector } from 'react-redux';
+import { useClerk } from "@clerk/nextjs";
+
+import useSignOut from '~/hooks/useSignOut';
 
 interface AuthenticationBtnsProps {
   user: Record<string, any> | null | undefined;
@@ -10,21 +13,8 @@ interface AuthenticationBtnsProps {
 
 const AuthenticationBtns: FC<AuthenticationBtnsProps> = ({ user }) => {
 
-  const { signOut, redirectToSignIn } = useClerk();
-  const { push } = useRouter();
-
-  const signInHandler = () => {
-    redirectToSignIn();
-    push('/');
-    // @TODO: set user to redux store
-  };
-
-  const signOutHandler = () => {
-    signOut();
-    // @TODO: Create page for unsgined 
-    push('/');
-    // @TODO: set user to redux store
-  };
+  const { openSignIn } = useClerk();
+  const signOut = useSignOut();
 
   if (user) {
     return (
@@ -32,7 +22,7 @@ const AuthenticationBtns: FC<AuthenticationBtnsProps> = ({ user }) => {
         <NavDropdown.Item as={Link} href="/me">
           View profile
         </NavDropdown.Item>
-        <NavDropdown.Item onClick={() => signOutHandler()}>
+        <NavDropdown.Item onClick={() => signOut()}>
           Log out
         </NavDropdown.Item>
       </>
@@ -40,16 +30,18 @@ const AuthenticationBtns: FC<AuthenticationBtnsProps> = ({ user }) => {
   }
 
   return (
-    <NavDropdown.Item onClick={() => signInHandler()}>
-      Sign In
-    </NavDropdown.Item>
+    <>
+      <NavDropdown.Item onClick={() => openSignIn()}>
+        Sign In
+      </NavDropdown.Item>
+    </>
   );
 };
 
 const Header: FC = () => {
 
-  const { user } = useUser();
   const { push } = useRouter();
+  const { user } = useSelector((state: any) => state.userReducer);
 
   const goHome = () => {
     push('/');
