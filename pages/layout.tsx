@@ -3,8 +3,8 @@ import { Container, Row, Col } from "react-bootstrap";
 import { useUser } from "@clerk/nextjs";
 import { useSelector, useDispatch } from 'react-redux';
 
-import { AppDispatch } from '~/redux/store';
-import { signIn } from '~/redux/features/userSlice';
+import { type AppDispatch } from '~/redux/store';
+import { signIn, type UserInitialState } from '~/redux/features/userSlice';
 import Header from "~/components/shared/Header";
 
 const NotAuth = () => (
@@ -21,15 +21,15 @@ const Layout = (
   { children }: { children: ReactNode }
 ) => {
 
-  const { user } = useSelector((state: any) => state.userReducer);
+  const { user } = useSelector((state: { userReducer: UserInitialState }) => state.userReducer);
   const { user: userClerk } = useUser();
   const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
-    if (!user || (userClerk && userClerk?.fullName !== user.fullName)) {
+    if (!user || (userClerk && userClerk?.fullName !== user?.fullName)) {
       dispatch(signIn({ user: userClerk }));
     }
-  }, [userClerk]);
+  }, [userClerk, user, dispatch]);
 
   return (
     <main>

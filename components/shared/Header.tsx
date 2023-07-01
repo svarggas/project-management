@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { type FC } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 import { useClerk } from "@clerk/nextjs";
 
 import useSignOut from '~/hooks/useSignOut';
+import { type UserInitialState } from '~/redux/features/userSlice';
 
 interface AuthenticationBtnsProps {
   user: Record<string, any> | null | undefined;
@@ -41,7 +42,7 @@ const AuthenticationBtns: FC<AuthenticationBtnsProps> = ({ user }) => {
 const Header: FC = () => {
 
   const { push } = useRouter();
-  const { user } = useSelector((state: any) => state.userReducer);
+  const { user } = useSelector((state: { userReducer: UserInitialState }) => state.userReducer);
 
   const goHome = () => {
     push('/');
