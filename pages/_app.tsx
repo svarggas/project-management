@@ -4,13 +4,16 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 
 import Layout from "./layout";
+import { ReduxProvider } from "~/redux/provider";
 
 const App: AppType = ({ Component, pageProps }) => {
     return (
         <ClerkProvider {...pageProps}>
-            <Layout>
-                <Component {...pageProps} />
-            </Layout>
+            <ReduxProvider>
+                <Layout>
+                    <Component {...pageProps} />
+                </Layout>
+            </ReduxProvider>
         </ClerkProvider>
     );
 }
