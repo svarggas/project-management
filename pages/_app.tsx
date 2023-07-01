@@ -5,18 +5,23 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 
 import Layout from "./layout";
+import { ReduxProvider } from "~/redux/provider";
 
 const App: AppType = ({ Component, pageProps }) => {
     return (
-        <ClerkProvider {...pageProps}>
+        <>
             <Head>
                 <link rel="shortcut icon" href="/favicon.png" />
                 <title key="title">Project Management</title>
             </Head>
-            <Layout>
-                <Component {...pageProps} />
-            </Layout>
-        </ClerkProvider>
+            <ClerkProvider {...pageProps}>
+                <ReduxProvider>
+                    <Layout>
+                        <Component {...pageProps} />
+                    </Layout>
+                </ReduxProvider>
+            </ClerkProvider>
+        </>
     );
 }
 
